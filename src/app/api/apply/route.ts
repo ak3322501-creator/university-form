@@ -32,14 +32,16 @@ export async function POST(req: Request) {
       ? (validated.academic.obtained_marks / validated.academic.total_marks) * 100 
       : 0;
 
-    const { data, error } = await supabaseAdmin
+      const { data, error } = await supabaseAdmin
       .from('applicants')
       .insert({
         application_id: appId,
         ...validated.personal,
         ...validated.academic,
         ...validated.program,
-        ...validated.declaration,
+        signature_name: validated.declaration.signature_name,
+        signature_date: validated.declaration.signature_date,
+        declaration_agreed: validated.declaration.declaration_agreed,
         percentage,
         status: 'submitted'
       })

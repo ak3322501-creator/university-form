@@ -43,7 +43,7 @@ export default function ApplyPage() {
       const response = await fetch("/api/apply", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...formData, ...finalData }),
+        body: JSON.stringify({ ...formData, declaration: finalData }),
       });
 
       const result = await response.json();
